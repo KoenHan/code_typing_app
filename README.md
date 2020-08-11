@@ -1,1 +1,3 @@
 # code_typing_app
+ローカルで動かすためには最初に以下のコマンドを打つこと
+npm install
