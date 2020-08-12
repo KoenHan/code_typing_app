@@ -1,8 +1,6 @@
 const scraperjs = require('scraperjs');
-// const { resolve } = require('path');
 
 // とりあえずgithubを想定
-
 const get_texts = async (url, path) => {
     return new Promise(resolve => {
         scraperjs.StaticScraper.create(url)
@@ -12,7 +10,6 @@ const get_texts = async (url, path) => {
                 }).get();
             }).then((content) => {
                 resolve(content);
-                // resolve("hello");
             }).catch((error) => {
                 console.error('Error:', error);
             });
