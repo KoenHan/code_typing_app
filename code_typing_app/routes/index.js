@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// url入力ページ(トップページ)
+router.get('/', async (req, res, next) => {
+  res.render('index', { title: 'code_typingへようこそ' });
 });
 
 module.exports = router;

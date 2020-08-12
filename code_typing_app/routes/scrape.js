@@ -12,18 +12,21 @@ const get_texts = async (url, path) => {
                 }).get();
             }).then((content) => {
                 resolve(content);
+                // resolve("hello");
             }).catch((error) => {
                 console.error('Error:', error);
             });
     });
 }
 
-(async () => {
-    const path = "[id^=LC]";
-    const url = "https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py";
-    const res = await get_texts(url, path);
-    console.log(res);
-    // console.log(res[4][0] == ' ' && res[4][3] == ' ');
-})();
+// (
+    async () => {
+        const path = "[id^=LC]";
+        const url = "https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py";
+        const res = await get_texts(url, path);
+        console.log(res);
+        // console.log(res[4][0] == ' ' && res[4][3] == ' ');
+    }
+// )();
 
-// console.log(texts);
+module.exports = get_texts;

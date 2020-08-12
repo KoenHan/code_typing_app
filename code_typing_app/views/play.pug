@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p #{title}
+  br
+  p #{url}
+  br
+  #text
+  script(type='text/javascript', src='https://code.jquery.com/jquery-3.0.0.min.js')
+  script(type='text/javascript', src='/javascripts/test.js', id='main', data-texts=texts)
