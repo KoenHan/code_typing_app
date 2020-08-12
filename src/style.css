@@ -1,4 +1,8 @@
 .wrap
 {
-    background-color: white;
+    text-align:center;
+}
+.code span
+{
+    display: block;
 }
