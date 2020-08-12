@@ -25,13 +25,13 @@ const texts_ele = document.getElementById("text");
 
 // 要素追加
 for(let i = 0; i < texts.length; i++){
-    const text_html = document.createElement("span");
+    const text_html = document.createElement("pre");
     text_html.textContent = texts[i];
     text_html.id = "text-"+i;
     texts_ele.appendChild(text_html);
     // const space = document.createElement("span");
     // space.textContent = " ";
     // texts_ele.appendChild(space);
-    const br = document.createElement("br");
-    texts_ele.appendChild(br);
+    // const br = document.createElement("br");
+    // texts_ele.appendChild(br);
 }
