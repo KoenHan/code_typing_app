@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p #{title}
+  //- h1= title
+
+  //- a(href="/")
+  //-   button トップページに戻る
+
   br
-  p #{url}
-  br
-  //- #text
   .wrap
     |
     input(type="button" id="start_button" name="url" placeholder="" value="start" onclick="ready()")
@@ -24,3 +24,5 @@ block content
 
   script(type='text/javascript', src='https://code.jquery.com/jquery-3.0.0.min.js')
   script(type='text/javascript', src='/javascripts/code_typing.js', id='main', data-texts=texts)
+  //- script(type='text/javascript', src='/javascripts/script.js')
+

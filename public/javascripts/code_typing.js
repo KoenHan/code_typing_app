@@ -1,17 +1,3 @@
-// const download_texts =[
-//     "#include <bits/stdc++.h>",
-//     "using namespace std;",
-//     "using ll = long long;",
-//     "",
-//     "int main()",
-//     "{",
-//     "    ios::sync_with_stdio(false);",
-//     "    cin.tie(0);",
-//     "",
-//     "    return 0;",
-//     "}",
-// ];
-
 const download_texts = $("#main").data("texts");
 
 const RED = "#DC143C";
@@ -56,7 +42,7 @@ function start_game()
     target_char_idx = 0;
     is_running = true;
     init_display_code();
-    document.addEventListener("keypress", listening_type)
+    document.addEventListener("keypress", listening_type, false);
     let limit = 90;
     displayed_countdown.innerHTML = "Limit : " + limit;
     let limittimer = setInterval(() =>{
@@ -122,6 +108,7 @@ function listening_type(keypress_event)
     if(keypress_event.keyCode == 13) key_str = "enter"
     else key_str = String.fromCharCode(keypress_event.keyCode);
     update(key_str);
+    keypress_event.preventDefault();
 }
 
 function update(key_str)
