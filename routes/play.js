@@ -7,7 +7,6 @@ router.post('/', async (req, res, next) => {
   const path = "[id^=LC]";
   const url = req.body.url;
   const texts = await get_texts(url, path);
-  console.log(texts);
   res.render('play', { title: 'タイピング練習ページ', texts: texts, url: url});
 });
 
