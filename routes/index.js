@@ -3,11 +3,7 @@ var router = express.Router();
 
 // url入力ページ(トップページ)
 router.get('/', async (req, res, next) => {
-  res.render('index', {
-    title: 'Code Typing',
-    description: 'URL先のコードでタイピング練習ができるサイトです．',
-    input_explain: 'URLを入力してください．'
-  });
+  res.render('index', { title: 'code_typingへようこそ' });
 });
 
 module.exports = router;
