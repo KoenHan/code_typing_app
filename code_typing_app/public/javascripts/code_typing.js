@@ -78,10 +78,10 @@ function init_display_code()
     {
         const line = document.createElement("span");
         line.textContent = download_texts[i];
-        if(download_texts[i] == "")
+        if(download_texts[i] == "\n")
         {
             line.style.visibility = "hidden";
-            line.textContent = "Han Koen";
+            line.textContent = "Fukatsu Ren";
         }
         untyped_lines.appendChild(line);
     }

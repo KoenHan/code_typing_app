@@ -9,7 +9,7 @@ block content
   //- #text
   .wrap
     |
-    input(type="button" id="start_button" name="url" placeholder="" value="stark" onclick="ready()")
+    input(type="button" id="start_button" name="url" placeholder="" value="start" onclick="ready()")
     |
     #displayed_countdown
     |
@@ -24,14 +24,3 @@ block content
 
   script(type='text/javascript', src='https://code.jquery.com/jquery-3.0.0.min.js')
   script(type='text/javascript', src='/javascripts/code_typing.js', id='main', data-texts=texts)
-  //- script(type='text/javascript', src='/javascripts/test.js', id='main', data-texts=texts)
-
-
-//- <div class="wrap">
-//-             <input type="button" id="start_button" value="start" onclick="ready()">
-//-             <div id="displayed_countdown"></div>
-//-             <div id="displayed_score"></div>
-//-         </div>
-//-         <pre class="code">
-//-             <div id="typed_lines"></div><div id="target_line"></div><div id="untyped_lines"></div>
-//-         </pre>
