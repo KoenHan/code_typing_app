@@ -1,9 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p #{title}
+  p #{description}
   form(action="/play" method="POST")
-    p URL:
-    input(type="text" name="url" placeholder="" value="https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py")
-    input(type="submit")
+    p #{input_explain}
+    input(
+      type="text",
+      name="url",
+      placeholder="",
+      size="100",
+      value="https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py")
+    br
+    input.btn.btn-primary(type="submit", value="練習する")
