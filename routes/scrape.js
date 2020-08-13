@@ -19,7 +19,7 @@ const get_texts = async (url, path) => {
 // (
     async () => {
         const path = "[id^=LC]";
-        const url = "https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py";
+        const url = "https://github.com/KoenHan/gym_sfm/blaob/master/gym_sfm/envs/world.py";
         const res = await get_texts(url, path);
         console.log(res);
         // console.log(res[4][0] == ' ' && res[4][3] == ' ');
