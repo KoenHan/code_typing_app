@@ -1,8 +1,8 @@
 const download_texts = $("#main").data("texts");
 const ext = $("#main").data("ext");
 
-const RED = "#DC143C";
-const GREEN = "#228B22";
+const RED = "#FF82B2";
+const GREEN = "#99FF99";
 const RETURN = "\u23CE";
 
 const start_button = document.getElementById("start_button");
