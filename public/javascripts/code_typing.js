@@ -52,6 +52,7 @@ function start_game()
         if(limit <= 0 || !is_running)
         {
             clearInterval(limittimer);
+            document.removeEventListener("keypress", listening_type);
             finish_typing();
         }
     }, 1000);
@@ -68,7 +69,7 @@ function init_display_code()
         if(download_texts[i] == "\n")
         {
             line.style.visibility = "hidden";
-            line.textContent = "Fukatsu Ren";
+            line.textContent = "koren";
         }
         untyped_lines.appendChild(line);
     }
@@ -128,7 +129,7 @@ function update(key_str)
         if(target_words != "") line.textContent = target_words;
         else
         {
-            line.textContent = "Han Koen";
+            line.textContent = "koren";
             line.style.visibility = "hidden";
         }
         typed_lines.appendChild(line);
