@@ -5,7 +5,7 @@ const RED = "#FF82B2";
 const GREEN = "#99FF99";
 const RETURN = "\u23CE";
 
-const start_button = document.getElementById("start_button");
+const start_message = document.getElementById("start_message");
 const displayed_countdown = document.getElementById("displayed_countdown");
 const typed_lines = document.getElementById("typed_lines");
 const target_line = document.getElementById("target_line");
@@ -18,9 +18,24 @@ let is_running = false;
 let target_words = "";
 let target_char_idx = 0;
 
+
+window.onload = () => {
+    document.addEventListener("keypress", waiting_space, false);
+}
+
+function waiting_space(keypress_event)
+{
+    keypress_event.preventDefault();
+    if(keypress_event.keyCode == 32)
+    {
+        start_message.style.visibility = "hidden";
+        ready();
+        document.removeEventListener("keypress", waiting_space);
+    }
+}
+
 function ready()
 {
-    start_button.style.visibility = "hidden";
     displayed_score.innerHTML = "";
     let countdown = 3;
     displayed_countdown.innerHTML = countdown;
@@ -98,8 +113,11 @@ function clear_code()
 function finish_typing()
 {
     clear_code();
+    setTimeout(() => {
+        start_message.style.visibility = "visible";
+        document.addEventListener("keypress", waiting_space, false);
+    }, 1500);
     displayed_countdown.innerHTML = "";
-    start_button.style.visibility = "visible";
 
     displayed_score.innerHTML = "correct: " + correct + "<br>mistype: " + mistype + "<br>percent: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
 }
