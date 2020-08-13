@@ -17,6 +17,8 @@ let correct = 0;
 let is_running = false;
 let target_words = "";
 let target_char_idx = 0;
+let start_time;
+let end_time;
 
 
 window.onload = () => {
@@ -59,6 +61,7 @@ function start_game()
     is_running = true;
     init_display_code();
     document.addEventListener("keypress", listening_type, false);
+    start_time = performance.now();
     let limit = 90;
     displayed_countdown.innerHTML = "Limit : " + limit;
     let limittimer = setInterval(() =>{
@@ -112,6 +115,7 @@ function clear_code()
 
 function finish_typing()
 {
+    end_time = performance.now();
     clear_code();
     setTimeout(() => {
         start_message.style.visibility = "visible";
@@ -119,7 +123,12 @@ function finish_typing()
     }, 1500);
     displayed_countdown.innerHTML = "";
 
-    displayed_score.innerHTML = "correct: " + correct + "<br>mistype: " + mistype + "<br>percent: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
+    displayed_score.innerHTML = "time: " + ((end_time - start_time) / 1000).toFixed(1) +
+                                "<br>WPM: " + (correct / (((end_time - start_time) / 1000) / 60)).toFixed(1) +
+                                "<br>CPS: " + (correct / ((end_time - start_time) / 1000)).toFixed(1) +
+                                "<br>correct: " + correct +
+                                "<br>wrong: " + mistype +
+                                "<br>accuracy: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
 }
 
 function listening_type(keypress_event)
