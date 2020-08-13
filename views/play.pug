@@ -6,6 +6,14 @@ block content
     |
     #start_message spaceを押すとスタートします。
     |
+    p#limit_message
+      label 制限時間
+      select#selected_limit_time(name="limit_time")
+        option(value="30", selected="selected") 30秒
+        option(value="60") 60秒
+        option(value="90") 90秒
+        option(value="0") なし
+    |
     #displayed_countdown
     |
     #displayed_score
