@@ -6,6 +6,8 @@ const GREEN = "#99FF99";
 const RETURN = "\u23CE";
 
 const start_message = document.getElementById("start_message");
+const limit_message = document.getElementById("limit_message");
+const selected_limit_time = document.getElementById("selected_limit_time");
 const displayed_countdown = document.getElementById("displayed_countdown");
 const typed_lines = document.getElementById("typed_lines");
 const target_line = document.getElementById("target_line");
@@ -20,7 +22,6 @@ let target_char_idx = 0;
 let start_time;
 let end_time;
 
-
 window.onload = () => {
     document.addEventListener("keypress", waiting_space, false);
 }
@@ -30,7 +31,6 @@ function waiting_space(keypress_event)
     keypress_event.preventDefault();
     if(keypress_event.keyCode == 32)
     {
-        start_message.style.visibility = "hidden";
         ready();
         document.removeEventListener("keypress", waiting_space);
     }
@@ -38,6 +38,10 @@ function waiting_space(keypress_event)
 
 function ready()
 {
+    // start_message.style.visibility = "hidden";
+    // limit_message.style.visibility = "hidden";
+    start_message.style.display = "none";
+    limit_message.style.display = "none";
     displayed_score.innerHTML = "";
     let countdown = 3;
     displayed_countdown.innerHTML = countdown;
@@ -62,7 +66,7 @@ function start_game()
     init_display_code();
     document.addEventListener("keypress", listening_type, false);
     start_time = performance.now();
-    let limit = 90;
+    let limit = selected_limit_time.value;
     displayed_countdown.innerHTML = "Limit : " + limit;
     let limittimer = setInterval(() =>{
         limit--;
@@ -117,8 +121,11 @@ function finish_typing()
 {
     end_time = performance.now();
     clear_code();
+    // start_message.style.visibility = "visible";
+    // limit_message.style.visibility = "visible";
+    start_message.style.display = "block";
+    limit_message.style.display = "block";
     setTimeout(() => {
-        start_message.style.visibility = "visible";
         document.addEventListener("keypress", waiting_space, false);
     }, 1500);
     displayed_countdown.innerHTML = "";
