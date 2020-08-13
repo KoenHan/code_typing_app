@@ -38,8 +38,6 @@ function waiting_space(keypress_event)
 
 function ready()
 {
-    // start_message.style.visibility = "hidden";
-    // limit_message.style.visibility = "hidden";
     start_message.style.display = "none";
     limit_message.style.display = "none";
     displayed_score.innerHTML = "";
@@ -121,8 +119,6 @@ function finish_typing()
 {
     end_time = performance.now();
     clear_code();
-    // start_message.style.visibility = "visible";
-    // limit_message.style.visibility = "visible";
     start_message.style.display = "block";
     limit_message.style.display = "block";
     setTimeout(() => {
@@ -131,7 +127,6 @@ function finish_typing()
     displayed_countdown.innerHTML = "";
 
     displayed_score.innerHTML = "time: " + ((end_time - start_time) / 1000).toFixed(1) +
-                                "<br>WPM: " + (correct / (((end_time - start_time) / 1000) / 60)).toFixed(1) +
                                 "<br>CPS: " + (correct / ((end_time - start_time) / 1000)).toFixed(1) +
                                 "<br>correct: " + correct +
                                 "<br>wrong: " + mistype +
