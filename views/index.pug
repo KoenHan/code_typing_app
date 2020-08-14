@@ -1,20 +1,21 @@
 extends layout
 
 block content
-  p URL先のコードでタイピング練習ができるサイトです．
+  h6 URL先のコードでタイピング練習ができるサイトです．
+  p.mb-4 GitHubのコードに対応しています．
   form(action="/" method="POST")
-    div
+    .input-group.w-50
       |
-      p URLを入力してください．
-      |
-      input(
+      input.form-control(
         type="text",
         name="url",
-        placeholder="",
+        placeholder="URLを入力してください．",
         size="100",
         value="https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py")
-
+        //- value="")
+      |
+      .input-group-append
+        input.btn.btn-primary(type="submit", value="練習する")
+    |
     if show_err
-      .alert.alert-danger #{err_message}
-
-    input.btn.btn-primary(type="submit", value="練習する")
+      .text-danger #{err_message}

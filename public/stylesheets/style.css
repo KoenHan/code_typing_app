@@ -1,17 +1,74 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../images/background/webb.png");
 }
 
 a {
   color: #00B7FF;
 }
 
-.wrap
+/* .wrap
 {
-    text-align:center;
+  text-align:center;
+} */
+
+.code {
+  display: none;
 }
-.code span
-{
-    display: block;
+
+.code span {
+  display: block;
+}
+
+.a-out {
+  position: relative;
+  width: 250px;
+  height: 50px;
+  /* background-color: #fffbb6;
+  border:1px solid #ff6a00; */
+}
+
+.a-out a {
+  margin: 0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: #00B7FF;
+}
+
+.lm-out {
+  position: relative;
+  width: auto;
+  height: 50px;
+}
+
+.lm-in {
+  margin: 0;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.t-out {
+  position: relative;
+  width: auto;
+  height: 220px;
+}
+
+.t-in {
+  margin: 0;
+  display: blok;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }

@@ -8,11 +8,13 @@ const RETURN = "\u23CE";
 const start_message = document.getElementById("start_message");
 const limit_message = document.getElementById("limit_message");
 const selected_limit_time = document.getElementById("selected_limit_time");
+const start_countdown = document.getElementById("start_countdown");
 const displayed_countdown = document.getElementById("displayed_countdown");
 const typed_lines = document.getElementById("typed_lines");
 const target_line = document.getElementById("target_line");
 const untyped_lines = document.getElementById("untyped_lines");
 const displayed_score = document.getElementById("displayed_score");
+const code = document.getElementById("code");
 
 let mistype = 0;
 let correct = 0;
@@ -42,10 +44,12 @@ function ready()
     limit_message.style.display = "none";
     displayed_score.innerHTML = "";
     let countdown = 3;
-    displayed_countdown.innerHTML = countdown;
+    start_countdown.innerHTML = countdown;
+    // displayed_countdown.innerHTML = countdown;
     let readytimer = setInterval(() => {
         countdown--;
-        displayed_countdown.innerHTML = countdown;
+        start_countdown.innerHTML = countdown;
+        // displayed_countdown.innerHTML = countdown;
         if(countdown <= 0)
         {
             clearInterval(readytimer);
@@ -56,6 +60,7 @@ function ready()
 
 function start_game()
 {
+    code.style.display = "block";
     mistype = 0;
     correct = 0;
     target_words = "";
@@ -65,6 +70,7 @@ function start_game()
     document.addEventListener("keypress", listening_type, false);
     start_time = performance.now();
     let limit = selected_limit_time.value;
+    start_countdown.innerHTML = "";
     displayed_countdown.innerHTML = "Limit : " + limit;
     let limittimer = setInterval(() =>{
         limit--;
@@ -120,17 +126,48 @@ function finish_typing()
     end_time = performance.now();
     clear_code();
     start_message.style.display = "block";
-    limit_message.style.display = "block";
+    limit_message.style.display = "flex";
+    code.style.display = "none";
+
     setTimeout(() => {
         document.addEventListener("keypress", waiting_space, false);
     }, 1500);
     displayed_countdown.innerHTML = "";
 
-    displayed_score.innerHTML = "time: " + ((end_time - start_time) / 1000).toFixed(1) +
-                                "<br>CPS: " + (correct / ((end_time - start_time) / 1000)).toFixed(1) +
-                                "<br>correct: " + correct +
-                                "<br>wrong: " + mistype +
-                                "<br>accuracy: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
+    // displayed_score.innerHTML = "time: " + ((end_time - start_time) / 1000).toFixed(1) +
+    //                             "<br>CPS: " + (correct / ((end_time - start_time) / 1000)).toFixed(1) +
+    //                             "<br>correct: " + correct +
+    //                             "<br>wrong: " + mistype +
+    //                             "<br>accuracy: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
+    displayed_score.innerHTML =
+        "<h4 class=\"text-center\">Result</h4>" +
+        "<div class=\"t-out\">" +
+        "<table class=\"table table-bordered table-striped bg-white t-in w-25\">" +
+        "<tbody>" +
+        "  <tr>" +
+        "    <th scope=\"row\">time</th>" +
+        "    <td>" + ((end_time - start_time) / 1000).toFixed(1) + "</td>" +
+        "  </tr>" +
+        "  <tr>" +
+        "    <th scope=\"row\">CPS</th>" +
+        "    <td>" + (correct / ((end_time - start_time) / 1000)).toFixed(1) + "</td>" +
+        "  </tr>" +
+        "  <tr>" +
+        "    <th scope=\"row\">correct</th>" +
+        "    <td>" + correct + "</td>" +
+        "  </tr>" +
+        "    <tr>" +
+        "    <th scope=\"row\">wrong</th>" +
+        "    <td>" + mistype + "</td>" +
+        "  </tr>" +
+        "  </tr>" +
+        "    <tr>" +
+        "    <th scope=\"row\">accuracy</th>" +
+        "    <td>" + (correct / (correct + mistype) * 100).toFixed(1) + "%</td>" +
+        "  </tr>" +
+        "</tbody>" +
+        "</div>" +
+        "</table>";
 }
 
 function listening_type(keypress_event)
