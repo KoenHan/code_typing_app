@@ -1,8 +1,8 @@
-document.onkeydown = pageMove;
-function pageMove()
-{
-  if (event.keyCode == 13)
-  {
-    // console.log(window.pageYOffset);
-  }
+function clear_session(){
+  var data = sessionStorage.getItem('err_mes');
+  console.log(data);
+  console.log('hello');
+  console.log(texts[0]);
+  sessionStorage.clear();
+  // localStorage.clear();
 }
