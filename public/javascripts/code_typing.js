@@ -3,7 +3,7 @@ const ext = $("#main").data("ext");
 
 const RED = "#FF82B2";
 const GREEN = "#99FF99";
-const GRAY = "#BDBEBD";
+const GRAY = "#808080";
 const RETURN = "\u23CE";
 
 const start_message = document.getElementById("start_message");
@@ -46,11 +46,9 @@ function ready()
     displayed_score.innerHTML = "";
     let countdown = 3;
     start_countdown.innerHTML = countdown;
-    // displayed_countdown.innerHTML = countdown;
     let readytimer = setInterval(() => {
         countdown--;
         start_countdown.innerHTML = countdown;
-        // displayed_countdown.innerHTML = countdown;
         if(countdown <= 0)
         {
             clearInterval(readytimer);
