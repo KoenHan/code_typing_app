@@ -56,12 +56,12 @@ function ready()
 
 function start_game()
 {
-    mistype = 0;
-    correct = 0;
     target_words = "";
     target_char_idx = 0;
     is_running = true;
     init_display_code();
+    correct = 0;
+    mistype = 0;
     document.addEventListener("keypress", listening_type, false);
     start_time = performance.now();
     let limit = selected_limit_time.value;
