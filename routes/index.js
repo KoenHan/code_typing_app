@@ -7,31 +7,47 @@ const err_message = [
 ]
 
 router.get('/', (req, res, next) => {
-  res.render('index', { show_err: false, err_message: '' });
+  if (req.session.texts != undefined) {
+    return res.render('play', { texts: req.session.texts, ext: req.session.ext });
+  }
+  if(req.session.show_err != undefined || req.session.show_err == true) {
+    return res.render('index', {
+      show_err: req.session.show_err,
+      err_mes: req.session.err_mes
+    });
+  }
+  return res.render('index', { show_err: false, err_message: '' });
 });
 
-const redirect = (res, err_mes) => {
-  return res.render('index', {
-    show_err: true,
-    err_message: err_mes
-  });
+const redirect = (res, req, err_mes) => {
+  req.session.show_err = true;
+  req.session.err_mes = err_mes;
+  return res.redirect('/');
 }
 
 router.post('/', async (req, res, next) => {
   const url = req.body.url;
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');
-  if(!url || dot_pos <= slash_pos || slash_pos == -1) return redirect(res, err_message[0]);
+  if(!url || dot_pos <= slash_pos || slash_pos == -1)
+    return redirect(res, req, err_message[0]);
 
   const ext = url.slice(dot_pos);
-  if(ext.length == 1) return redirect(res, err_message[0]);
+  if(ext.length == 1) return redirect(res, req, err_message[0]);
 
   const select_path = {
     'github' : '[id^=LC]'
   };
   const texts = await get_texts(url, select_path['github']);
-  if(!texts.length) return redirect(res, err_message[1]);
-  return res.render('play', { texts: texts, ext: ext});
+  if(!texts.length) return redirect(res, req, err_message[1]);
+  req.session.texts = texts;
+  req.session.ext = ext;
+  return res.redirect('/');
+});
+
+router.get('/cs', (req, res, next) => {
+  req.session.destroy();
+  return res.redirect('/');
 });
 
 module.exports = router;
