@@ -65,17 +65,28 @@ function start_game()
     document.addEventListener("keypress", listening_type, false);
     start_time = performance.now();
     let limit = selected_limit_time.value;
-    displayed_countdown.innerHTML = "Limit : " + limit;
-    let limittimer = setInterval(() =>{
-        limit--;
+    if(limit == 0)
+    {
+        displayed_countdown.innerHTML = "Limit : なし";
+    }
+    else
+    {
         displayed_countdown.innerHTML = "Limit : " + limit;
-        if(limit <= 0 || !is_running)
-        {
-            clearInterval(limittimer);
-            document.removeEventListener("keypress", listening_type);
-            finish_typing();
-        }
-    }, 1000);
+        let limittimer = setInterval(() =>{
+            limit--;
+            displayed_countdown.innerHTML = "Limit : " + limit;
+            if(!is_running)
+            {
+                clearInterval(limittimer);
+            }
+            else if(limit <= 0)
+            {
+                is_running = false;
+                clearInterval(limittimer);
+                finish_typing();
+            }
+        }, 1000);
+    }
 }
 
 function init_display_code()
@@ -117,6 +128,7 @@ function clear_code()
 
 function finish_typing()
 {
+    document.removeEventListener("keypress", listening_type);
     end_time = performance.now();
     clear_code();
     start_message.style.display = "block";
@@ -158,6 +170,7 @@ function update(key_str)
     if(target_words.length == target_char_idx && !untyped_lines.firstChild)
     {
         is_running = false;
+        finish_typing();
         return;
     }
     let back_color;
