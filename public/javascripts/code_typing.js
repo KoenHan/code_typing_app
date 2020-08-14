@@ -74,6 +74,7 @@ function start_game()
     start_countdown.innerHTML = "";
     if(limit == 0)
     {
+        displayed_countdown.style.position = "absolute";
         displayed_countdown.innerHTML = "Limit : なし";
     }
     else
