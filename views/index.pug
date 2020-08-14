@@ -1,21 +1,23 @@
 extends layout
 
 block content
-  h6.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
-  p.mb-4.ml-5 GitHubのコードに対応しています．
+  h5.mb-2.ml-4 URL先のコードを使ってタイピング練習ができるサイトです．
+  p.mb-0.ml-5 GitHubのコードに対応しています．
+  p.mb-4.ml-5 試し打ち用にsample.cppとsample.pyがあります．
   form(action="/" method="POST")
     .input-group.w-75
       |
       input.form-control.ml-5(
-        type="text",
+        type="search",
         name="url",
-        placeholder="URLを入力してください．",
-        size="100",
-        value="https://github.com/KoenHan/gym_sfm/blob/master/gym_sfm/envs/world.py")
-        //- value="")
+        list="samples",
+        placeholder="URLを入力してください．")
+      datalist(id="samples")
+        option(value="sample.cpp")
+        option(value="sample.py")
       |
       .input-group-append
         input.btn.btn-color(type="submit", value="練習する")
     |
     if show_err
-      .text-danger #{err_mes}
+      .text-danger.ml-5 #{err_mes}
