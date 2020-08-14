@@ -17,8 +17,11 @@ a {
   display: none;
 }
 
-.code span {
+.code span
+{
   display: block;
+  white-space: pre-wrap;
+  overflow: hidden;
 }
 
 .a-out {
