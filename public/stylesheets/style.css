@@ -9,9 +9,11 @@ a {
 
 .wrap
 {
-    text-align:center;
+  text-align:center;
 }
 .code span
 {
-    display: block;
+  display: block;
+  white-space: normal;
+  overflow: hidden;
 }
