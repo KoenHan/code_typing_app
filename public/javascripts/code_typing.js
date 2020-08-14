@@ -139,6 +139,7 @@ function finish_typing()
     clear_code();
     start_message.style.display = "block";
     limit_message.style.display = "flex";
+    displayed_countdown.style.display = "none";
     code.style.display = "none";
 
     setTimeout(() => {

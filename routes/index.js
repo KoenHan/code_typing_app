@@ -3,7 +3,7 @@ var router = express.Router();
 const get_texts = require('./scrape.js');
 const err_message = [
   '有効なアドレスを入力してください．',
-  '見つかりませんでした．URLを確認してください．'
+  'コードを見つけられませんでした．URLを確認してください．'
 ]
 
 router.get('/', (req, res, next) => {
@@ -13,10 +13,10 @@ router.get('/', (req, res, next) => {
   if(req.session.show_err != undefined || req.session.show_err == true) {
     return res.render('index', {
       show_err: req.session.show_err,
-      err_mes: req.session.err_mes
+      err_mes: req.session.err_mes,
     });
   }
-  return res.render('index', { show_err: false, err_message: '' });
+  return res.render('index', { show_err: false, err_message: ''});
 });
 
 const redirect = (res, req, err_mes) => {
@@ -26,7 +26,10 @@ const redirect = (res, req, err_mes) => {
 }
 
 router.post('/', async (req, res, next) => {
-  const url = req.body.url;
+  let url = req.body.url;
+  if(url == "sample.cpp") url = "https://github.com/KoenHan/code_typing_app/blob/feature/slight-adjustment/examples/sample3.cpp";
+  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/feature/slight-adjustment/examples/sample1.py";
+
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');
   if(!url || dot_pos <= slash_pos || slash_pos == -1)
