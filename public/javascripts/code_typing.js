@@ -148,11 +148,6 @@ function finish_typing()
     }, 1500);
     displayed_countdown.innerHTML = "";
 
-    // displayed_score.innerHTML = "time: " + ((end_time - start_time) / 1000).toFixed(1) +
-    //                             "<br>CPS: " + (correct / ((end_time - start_time) / 1000)).toFixed(1) +
-    //                             "<br>correct: " + correct +
-    //                             "<br>wrong: " + mistype +
-    //                             "<br>accuracy: " + (correct / (correct + mistype) * 100).toFixed(1) + "%";
     displayed_score.innerHTML =
         "<h4 class=\"text-center\">Result</h4>" +
         "<div class=\"t-out\">" +
