@@ -1,17 +1,12 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("../images/background/webb.png");
+  background-image: url("../images/background/gplaypattern.png");
 }
 
 a {
   color: #00B7FF;
 }
-
-/* .wrap
-{
-  text-align:center;
-} */
 
 .code {
   display: none;
@@ -41,7 +36,8 @@ a {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   text-decoration: none;
-  color: #00B7FF;
+  color: #000000;
+  font-family: 'Nunito Sans', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
 .lm-out {
@@ -74,4 +70,17 @@ a {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+
+.title_accent {
+  color: #ffa500;
+}
+
+.btn-color {
+  background-color: #ffa500;
+  border-color: #ffa500;
+}
+
+.btn-color:hover {
+  background-color: #ff8c00;
 }

@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  h6 URL先のコードを使ってタイピング練習ができるサイトです．
-  p.mb-4 GitHubのコードに対応しています．
+  h6.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
+  p.mb-4.ml-5 GitHubのコードに対応しています．
   form(action="/" method="POST")
-    .input-group.w-50
+    .input-group.w-75
       |
-      input.form-control(
+      input.form-control.ml-5(
         type="text",
         name="url",
         placeholder="URLを入力してください．",
@@ -15,7 +15,7 @@ block content
         //- value="")
       |
       .input-group-append
-        input.btn.btn-primary(type="submit", value="練習する")
+        input.btn.btn-color(type="submit", value="練習する")
     |
     if show_err
       .text-danger #{err_mes}
