@@ -3,6 +3,7 @@ const ext = $("#main").data("ext");
 
 const RED = "#FF82B2";
 const GREEN = "#99FF99";
+const GRAY = "#BDBEBD";
 const RETURN = "\u23CE";
 
 const start_message = document.getElementById("start_message");
@@ -103,6 +104,7 @@ function init_display_code()
     {
         const line = document.createElement("span");
         line.textContent = download_texts[i];
+        line.style.color = GRAY;
         if(download_texts[i] == "\n")
         {
             line.style.visibility = "hidden";
@@ -247,6 +249,7 @@ function update(key_str)
     target_line.appendChild(target);
     const after = document.createElement("span");
     after.textContent = target_words.substring(target_char_idx+1, target_words.length);
+    after.style.color = GRAY;
     after.style.display = "inline";
     target_line.appendChild(after);
     target_line.scrollIntoView({
