@@ -1,29 +1,35 @@
 extends layout
 
 block content
-  br
   .wrap
     |
-    #start_message spaceを押すとスタートします。
+    .lm-out
+      #limit_message.form-inline.lm-in
+        |
+        label.my-1.mr-2.h6(for="selected_limit_time") 制限時間：
+        |
+        select#selected_limit_time.custom-select.my-1.mr-sm-2(name="limit_time")
+          option(value="3", selected="selected") 3秒
+          option(value="30") 30秒
+          option(value="60") 60秒
+          option(value="90") 90秒
+          option(value="0") なし
     |
-    p#limit_message
-      label 制限時間
-      select#selected_limit_time(name="limit_time")
-        option(value="30", selected="selected") 30秒
-        option(value="60") 60秒
-        option(value="90") 90秒
-        option(value="0") なし
+    h6#start_message.text-align.text-center.mb-5 spaceを押すとスタートします．
     |
-    #displayed_countdown
+    h1#start_countdown.text-center
     |
-    #displayed_score
-  pre.code
+    h6#displayed_countdown.text-center
     |
-    #typed_lines
-    |
-    #target_line
-    |
-    #untyped_lines
+    #displayed_score.text-center
+  pre#code.code.bg-white.card
+    .card-body
+      |
+      #typed_lines
+      |
+      #target_line
+      |
+      #untyped_lines
 
   script(type='text/javascript', src='https://code.jquery.com/jquery-3.0.0.min.js')
   script(
