@@ -61,27 +61,38 @@ function ready()
 function start_game()
 {
     code.style.display = "block";
-    mistype = 0;
-    correct = 0;
     target_words = "";
     target_char_idx = 0;
     is_running = true;
     init_display_code();
+    correct = 0;
+    mistype = 0;
     document.addEventListener("keypress", listening_type, false);
     start_time = performance.now();
     let limit = selected_limit_time.value;
     start_countdown.innerHTML = "";
-    displayed_countdown.innerHTML = "Limit : " + limit;
-    let limittimer = setInterval(() =>{
-        limit--;
+    if(limit == 0)
+    {
+        displayed_countdown.innerHTML = "Limit : なし";
+    }
+    else
+    {
         displayed_countdown.innerHTML = "Limit : " + limit;
-        if(limit <= 0 || !is_running)
-        {
-            clearInterval(limittimer);
-            document.removeEventListener("keypress", listening_type);
-            finish_typing();
-        }
-    }, 1000);
+        let limittimer = setInterval(() =>{
+            limit--;
+            displayed_countdown.innerHTML = "Limit : " + limit;
+            if(!is_running)
+            {
+                clearInterval(limittimer);
+            }
+            else if(limit <= 0)
+            {
+                is_running = false;
+                clearInterval(limittimer);
+                finish_typing();
+            }
+        }, 1000);
+    }
 }
 
 function init_display_code()
@@ -123,6 +134,7 @@ function clear_code()
 
 function finish_typing()
 {
+    document.removeEventListener("keypress", listening_type);
     end_time = performance.now();
     clear_code();
     start_message.style.display = "block";
@@ -179,11 +191,23 @@ function listening_type(keypress_event)
     keypress_event.preventDefault();
 }
 
+function is_shown()
+{
+    const ele = target_line
+    let ele_height = ele.offsetHeight;
+    let screen_height = window.innerHeight;
+    let ele_pos = ele.getBoundingClientRect().top - screen_height + ele_height * 2;
+
+    if(ele_pos < 0) return true;
+    else return false;
+}
+
 function update(key_str)
 {
     if(target_words.length == target_char_idx && !untyped_lines.firstChild)
     {
         is_running = false;
+        finish_typing();
         return;
     }
     let back_color;
@@ -236,6 +260,13 @@ function update(key_str)
     after.textContent = target_words.substring(target_char_idx+1, target_words.length);
     after.style.display = "inline";
     target_line.appendChild(after);
+    if(!is_shown(target_line))
+    {
+        target_line.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
 }
 
 function remove_last_whitespace()
