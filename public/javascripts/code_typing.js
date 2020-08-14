@@ -142,6 +142,17 @@ function listening_type(keypress_event)
     keypress_event.preventDefault();
 }
 
+function is_shown()
+{
+    const ele = target_line
+    let ele_height = ele.offsetHeight;
+    let screen_height = window.innerHeight;
+    let ele_pos = ele.getBoundingClientRect().top - screen_height + ele_height * 2;
+
+    if(ele_pos < 0) return true;
+    else return false;
+}
+
 function update(key_str)
 {
     if(target_words.length == target_char_idx && !untyped_lines.firstChild)
@@ -199,6 +210,13 @@ function update(key_str)
     after.textContent = target_words.substring(target_char_idx+1, target_words.length);
     after.style.display = "inline";
     target_line.appendChild(after);
+    if(!is_shown(target_line))
+    {
+        target_line.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
 }
 
 function remove_last_whitespace()
