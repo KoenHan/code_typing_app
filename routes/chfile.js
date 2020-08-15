@@ -26,7 +26,7 @@ router.get('/repos', async (req, res, next) => {
     });
   const repos_name = repos.map(repo => repo.name);
   // console.log(repos_name);
-  return res.render('ch_list', {
+  return res.render('ch_branch', {
     uri: '/chfile/repos/branches',
     items: repos_name,
     explain: 'リポジトリを選んでください．'
@@ -45,7 +45,7 @@ router.get('/repos/branches', async (req, res, next) => {
   const branches_name = branches.map(branch => branch.name);
   // console.log(branches_name);
   req.session.repo = req.query.value;
-  return res.render('ch_list', {
+  return res.render('ch_branch', {
     uri: '/chfile/repos/branches/contents',
     items: branches_name,
     explain: 'ブランチを選んでください．'
@@ -53,20 +53,46 @@ router.get('/repos/branches', async (req, res, next) => {
 });
 
 router.get('/repos/branches/contents', async (req, res, next) => {
+  if(req.query.type == 'file') {
+    // const url = contents_url[?];
+    const url = req.session.contents_data.find(cdata => cdata.name == req.query.name).url;
+    console.log(url);
+    req.session.texts = await get_texts(url, C['select_path']['github']);
+    req.session.ext = url.slice(url.lastIndexOf('.') + 1);
+    return res.redirect('/');
+  }
+  if(req.session.path != undefined) {
+    req.session.path += `/${req.query.name}`;
+  } else {
+    req.session.path = '';
+  }
+
   // フォルダ・ファイル一覧
-  let contents = await new Promise(resolve => {
-    client.get(`/repos/${req.session.ghuser_name}/${req.session.repo}/contents/`, {}, (err, status, body, headers) => {
-      resolve(body);
+  const contents = await new Promise(resolve => {
+    // warning : /contents/ -> /contents に変えた
+    client.get(
+      `/repos/${req.session.ghuser_name}/${req.session.repo}/contents${req.session.path}`,
+      {}, (err, status, body, headers) => {
+        resolve(body);
     });
   });
   console.log(contents);
-  const contents_name = contents.map(content => content.name);
-  const contents_type = contents.map(content => content.type);
-  const contents_url = contents.map(content => content.html_url);
-  req.session.repo = req.query.value;
-  return res.render('ch_list', {
+  // const contents_name = contents.map(content => content.name);
+  // const contents_type = contents.map(content => content.type);
+  // const contents_url = contents.map(content => content.html_url);
+  const contents_data = contents.map(content => {
+    const obj = {
+      name : content.name,
+      type : content.type,
+      url : content.html_url
+    };
+    return obj;
+  });
+  req.session.contents_data = contents_data;
+
+  return res.render('ch_content', {
     uri: '/chfile/repos/branches/contents',
-    items: contents_name,
+    items: contents_data,
     explain: 'ファイルまたはフォルダを選んでください．'
   });
 });

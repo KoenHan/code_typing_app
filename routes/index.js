@@ -60,10 +60,7 @@ router.post('/gh_url', async (req, res, next) => {
     return res.redirect('/');
   }
 
-  const select_path = {
-    'github' : '[id^=LC]'
-  };
-  const texts = await get_texts(url, select_path['github']);
+  const texts = await get_texts(url, C['select_path']['github']);
   if(!texts.length) {
     req.session.gh_url_se = true, req.session.gh_url_em = C['err_mes']['url'][1];
     return res.redirect('/');
