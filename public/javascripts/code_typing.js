@@ -1,6 +1,5 @@
 const download_texts = $("#main").data("texts");
 const ext = $("#main").data("ext");
-const ext = $("#main").data("test");
 
 const RED = "#FF82B2";
 const GREEN = "#99FF99";
