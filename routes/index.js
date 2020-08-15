@@ -37,11 +37,9 @@ router.post('/gh_user', async (req, res, next) => {
     return res.redirect('/');
   }
 
-  // todo: user_name入れて何も見つからなかった場合のバリデーション
-
   req.session.ghuser_name = req.body.user_name;
 
-  return res.redirect('/chfile');
+  return res.redirect('/chfile/repos');
 });
 
 router.post('/gh_url', async (req, res, next) => {
@@ -56,8 +54,8 @@ router.post('/gh_url', async (req, res, next) => {
     return res.redirect('/');
   }
 
-  const ext = url.slice(dot_pos);
-  if(ext.length == 1) {
+  const ext = url.slice(dot_pos+1);
+  if(!ext.length) {
     req.session.gh_url_se = true, req.session.gh_url_em = C['err_mes']['url'][0];
     return res.redirect('/');
   }
