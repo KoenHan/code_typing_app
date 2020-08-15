@@ -28,7 +28,7 @@ let reserved_words = {};
 
 window.onload = () => {
     document.addEventListener("keypress", waiting_space, false);
-    $.getJSON("./config/" + "cpp" + ".json", (data) => {
+    $.getJSON("./config/" + ext + ".json", (data) => {
         reserved_words = data;
     });
 }
@@ -97,6 +97,11 @@ function start_game()
             }
         }, 1000);
     }
+}
+
+function split_word(str)
+{
+    str = download_texts[0];
 }
 
 function init_display_code()
