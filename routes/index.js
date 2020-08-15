@@ -28,7 +28,7 @@ const redirect = (res, req, err_mes) => {
 router.post('/', async (req, res, next) => {
   let url = req.body.url;
   if(url == "sample.cpp") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.cpp";
-  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.py";
+  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/feature/master/examples/sample.py";
 
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');
