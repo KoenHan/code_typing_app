@@ -6,20 +6,21 @@ block content
   p.mb-0.ml-5 GitHubに対応しています．
   p.mb-0.ml-5 例) https://github.com/.../file
   p.mb-4.ml-5 試し打ち用にsample.cppとsample.pyがあります．
-  //- form(action="/gh_user" method="POST")
-  //-   .input-group.w-75
-  //-     |
-  //-     input.form-control.ml-5(
-  //-       type="search",
-  //-       name="user_name",
-  //-       placeholder="GitHubのユーザー名を入力してください．")
-  //-     |
-  //-     .input-group-append
-  //-       input.btn.btn-color(type="submit", value="検索")
-  //-   |
-  //-   if gh_user_se
-  //-     .text-danger.ml-5 #{gh_user_em}
-
+  form(action="/gh_user" method="POST")
+    .input-group.w-75
+      |
+      input.form-control.ml-5(
+        type="search",
+        name="user_name",
+        value="KoenHan",
+        placeholder="GitHubのユーザー名を入力してください．")
+      |
+      .input-group-append
+        input.btn.btn-color(type="submit", value="検索")
+    |
+    if gh_user_se
+      .text-danger.ml-5 #{gh_user_em}
+  br
   form(action="/gh_url" method="POST")
     .input-group.w-75
       |
