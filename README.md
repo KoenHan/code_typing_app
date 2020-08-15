@@ -11,6 +11,9 @@ $ git clone https://github.com/KoenHan/code_typing_app.git
 $ npm install
 ```
 
+## How to use (Web)
+<https://codetyping.herokuapp.com>
+
 ## How to use (Local)
 1. Launch Server
 ```
