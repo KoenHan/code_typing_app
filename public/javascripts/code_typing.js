@@ -72,8 +72,7 @@ function start_game()
     start_countdown.innerHTML = "";
     if(limit == 0)
     {
-        displayed_countdown.style.position = "absolute";
-        displayed_countdown.innerHTML = "Limit : なし";
+        displayed_countdown.innerHTML = "";
     }
     else
     {
@@ -84,6 +83,7 @@ function start_game()
             if(!is_running)
             {
                 clearInterval(limittimer);
+                finish_typing(); 
             }
             else if(limit <= 0)
             {
@@ -140,7 +140,6 @@ function finish_typing()
     clear_code();
     start_message.style.display = "block";
     limit_message.style.display = "flex";
-    displayed_countdown.style.display = "none";
     code.style.display = "none";
 
     setTimeout(() => {
