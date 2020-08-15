@@ -20,6 +20,15 @@ const C = {
     },
     select_path : {
         'github' : '[id^=LC]'
+    },
+    explain : {
+        'repo' : 'リポジトリを選んでください．',
+        'branch' : 'ブランチを選んでください．',
+        'contente' : 'ファイルまたはフォルダを選んでください．'
+    },
+    sample_url : {
+        'cpp' : "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.cpp",
+        'py' : "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.py"
     }
 }
 

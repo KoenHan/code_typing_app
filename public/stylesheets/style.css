@@ -107,3 +107,11 @@ li a::hover {
   color: #000000;
   text-decoration: none;
 }
+
+.ml-7{
+  margin-left: 80px;
+}
+
+.ml-10{
+  margin-left: 86px;
+}

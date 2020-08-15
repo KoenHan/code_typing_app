@@ -44,8 +44,8 @@ router.post('/gh_user', async (req, res, next) => {
 
 router.post('/gh_url', async (req, res, next) => {
   let url = req.body.url;
-  if(url == "sample.cpp") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.cpp";
-  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.py";
+  if(url == "sample.cpp") url = C['sample_url']['cpp'];
+  else if(url == "sample.py") url = C['sample_url']['py'];
 
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');

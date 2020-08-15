@@ -41,7 +41,7 @@ router.get('/repos', async (req, res, next) => {
   return res.render('ch_branch', {
     uri: '/chfile/repos/branches',
     items: repos_name,
-    explain: 'リポジトリを選んでください．',
+    explain: C['explain']['repo'],
     content_se: content_se,
     content_em: content_em
   });
@@ -77,7 +77,7 @@ router.get('/repos/branches', async (req, res, next) => {
   return res.render('ch_branch', {
     uri: '/chfile/repos/branches/contents',
     items: branches_name,
-    explain: 'ブランチを選んでください．',
+    explain: C['explain']['branch'],
     content_se: content_se,
     content_em: content_em
   });
@@ -146,7 +146,7 @@ router.get('/repos/branches/contents', async (req, res, next) => {
   return res.render('ch_content', {
     uri: '/chfile/repos/branches/contents',
     items: contents_data,
-    explain: 'ファイルまたはフォルダを選んでください．',
+    explain: C['explain']['content'],
     content_se: content_se,
     content_em: content_em
   });
