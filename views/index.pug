@@ -1,30 +1,32 @@
 extends layout
 
 block content
-  h5.mb-2.ml-4 URL先のコードを使ってタイピング練習ができるサイトです．
-  p.mb-0.ml-5 コードのURLを入れてください．
-  p.mb-0.ml-5 GitHubに対応しています．
-  p.mb-0.ml-5 例) https://github.com/.../file
-  p.mb-4.ml-5 試し打ち用にsample.cppとsample.pyがあります．
+  h5.mb-2.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
+  //- p.mb-0.ml-4 コードのURLを入れてください．
+  //- p.mb-0.ml-4 GitHubに対応しています．
+  //- p.mb-0.ml-4 例) https://github.com/.../file
+  //- p.mb-4.ml-4 試し打ち用にsample.cppとsample.pyがあります．
   form(action="/gh_user" method="POST")
     .input-group.w-75
       |
-      input.form-control.ml-5(
+      input.form-control.ml-7(
         type="search",
         name="user_name",
-        value="KoenHan",
         placeholder="GitHubのユーザー名を入力してください．")
       |
       .input-group-append
         input.btn.btn-color(type="submit", value="検索")
     |
     if gh_user_se
-      .text-danger.ml-5 #{gh_user_em}
+      .text-danger.ml-4 #{gh_user_em}
+  details.ml-10.w-50
+    summary githubユーザー名を用いた使い方
+    p testtest
   br
   form(action="/gh_url" method="POST")
     .input-group.w-75
       |
-      input.form-control.ml-5(
+      input.form-control.ml-7(
         type="search",
         name="url",
         list="samples",
@@ -37,12 +39,15 @@ block content
         input.btn.btn-color(type="submit", value="練習する")
     |
     if gh_url_se
-      .text-danger.ml-5 #{gh_url_em}
+      .text-danger.ml-4 #{gh_url_em}
+  details.ml-10.w-50
+    summary githubのURLを用いた使い方
+    p testtest
   br
   form(action="/upload", method="POST", enctype="multipart/form-data")
     .input-group.w-75
       |
-      input.form-control.ml-5(
+      input.form-control.ml-7(
         type="file",
         name="file",
         placeholder="ファイルをアップロードをしてください．")
@@ -51,4 +56,7 @@ block content
         input.btn.btn-color(type="submit", value="アップロード")
     |
     if upload_se
-      .text-danger.ml-5 #{upload_em}
+      .text-danger.ml-4 #{upload_em}
+  details.ml-10.w-50
+    summary ファイルアップロードを用いた使い方
+    p testtest
