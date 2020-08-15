@@ -1,8 +1,10 @@
 extends layout
 
 block content
-  p.mb-0.ml-5 #{explain}
-  ul
+  p.mb-3.ml-4 #{explain}
+  if content_se
+    .text-danger.ml-5 #{content_em}
+  ul.list-group.ml-5.w-50
     each item in items
-      li
+      li.list-group-item.list-group-item-action
         a(href=uri+"?name="+item.name+"&type="+item.type) #{item.name}
