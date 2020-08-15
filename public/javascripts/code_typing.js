@@ -24,9 +24,13 @@ let target_words = "";
 let target_char_idx = 0;
 let start_time;
 let end_time;
+let reserved_words = {};
 
 window.onload = () => {
     document.addEventListener("keypress", waiting_space, false);
+    $.getJSON("./config/" + "cpp" + ".json", (data) => {
+        reserved_words = data;
+    });
 }
 
 function waiting_space(keypress_event)
