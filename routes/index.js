@@ -59,8 +59,13 @@ router.post('/gh_user', async (req, res, next) => {
 
 router.post('/gh_url', async (req, res, next) => {
   let url = req.body.url;
+<<<<<<< HEAD
   if(url == 'sample.cpp') url = 'https://github.com/KoenHan/code_typing_app/blob/feature/slight-adjustment/examples/sample.cpp';
   else if(url == 'sample.py') url = 'https://github.com/KoenHan/code_typing_app/blob/feature/slight-adjustment/examples/sample.py';
+=======
+  if(url == "sample.cpp") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.cpp";
+  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.py";
+>>>>>>> 0de15e61eac6fc1f9b1219255c3a6fdba711bc5e
 
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');
