@@ -6,6 +6,7 @@ var logger = require('morgan');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
+var chFileRouter = require('./routes/chfile');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
+app.use('/chfile', chFileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
