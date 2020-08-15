@@ -6,7 +6,21 @@ block content
   p.mb-0.ml-5 GitHubに対応しています．
   p.mb-0.ml-5 例) https://github.com/.../file
   p.mb-4.ml-5 試し打ち用にsample.cppとsample.pyがあります．
-  form(action="/" method="POST")
+  //- form(action="/gh_user" method="POST")
+  //-   .input-group.w-75
+  //-     |
+  //-     input.form-control.ml-5(
+  //-       type="search",
+  //-       name="user_name",
+  //-       placeholder="GitHubのユーザー名を入力してください．")
+  //-     |
+  //-     .input-group-append
+  //-       input.btn.btn-color(type="submit", value="検索")
+  //-   |
+  //-   if gh_user_se
+  //-     .text-danger.ml-5 #{gh_user_em}
+
+  form(action="/gh_url" method="POST")
     .input-group.w-75
       |
       input.form-control.ml-5(
@@ -21,5 +35,19 @@ block content
       .input-group-append
         input.btn.btn-color(type="submit", value="練習する")
     |
-    if show_err
-      .text-danger.ml-5 #{err_mes}
+    if gh_url_se
+      .text-danger.ml-5 #{gh_url_em}
+  br
+  form(action="/upload", method="POST", enctype="multipart/form-data")
+    .input-group.w-75
+      |
+      input.form-control.ml-5(
+        type="file",
+        name="file",
+        placeholder="ファイルをアップロードをしてください．")
+      |
+      .input-group-append
+        input.btn.btn-color(type="submit", value="アップロード")
+    |
+    if upload_se
+      .text-danger.ml-5 #{upload_em}
