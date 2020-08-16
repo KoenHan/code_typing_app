@@ -28,9 +28,6 @@ let reserved_words = {};
 
 window.onload = () => {
     document.addEventListener("keypress", waiting_space, false);
-    $.getJSON("./config/" + ext + ".json", (data) => {
-        reserved_words = data;
-    });
 }
 
 function waiting_space(keypress_event)
