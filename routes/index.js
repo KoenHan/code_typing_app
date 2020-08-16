@@ -1,48 +1,91 @@
 var express = require('express');
-var router = express.Router();
+var multer = require('multer');
+var fs = require('fs');
 const get_texts = require('./scrape.js');
-const err_message = [
-  '有効なアドレスを入力してください．',
-  'コードを見つけられませんでした．URLを確認してください．'
-]
+const C = require('./constant.js');
+
+var router = express.Router();
 
 router.get('/', (req, res, next) => {
   if (req.session.texts != undefined) {
-    return res.render('play', { texts: req.session.texts, ext: req.session.ext });
+    const texts = req.session.texts;
+    const ext = req.session.ext;
+    req.session.destroy();
+    return res.render('play', { texts: texts, ext: ext});
   }
-  if(req.session.show_err != undefined || req.session.show_err == true) {
-    return res.render('index', {
-      show_err: req.session.show_err,
-      err_mes: req.session.err_mes,
-    });
-  }
-  return res.render('index', { show_err: false, err_message: ''});
+
+  let gh_user_se = false, gh_url_se = false, upload_se = false;
+  let gh_user_em = '', gh_url_em = '', upload_em = '';
+  if(req.session.gh_user_se != undefined || req.session.gh_user_se == true)
+    gh_user_se = req.session.gh_user_se, gh_user_em = req.session.gh_user_em;
+  if(req.session.gh_url_se != undefined || req.session.gh_url_se == true)
+    gh_url_se = req.session.gh_url_se, gh_url_em = req.session.gh_url_em;
+  if(req.session.upload_se != undefined || req.session.upload_se == true)
+    upload_se = req.session.upload_se, upload_em = req.session.upload_em;
+
+  return res.render('index', {
+    gh_user_se: gh_user_se, gh_url_se: gh_url_se, upload_se: upload_se,
+    gh_user_em: gh_user_em, gh_url_em: gh_url_em, upload_em: upload_em,
+  });
 });
 
-const redirect = (res, req, err_mes) => {
-  req.session.show_err = true;
-  req.session.err_mes = err_mes;
-  return res.redirect('/');
-}
+router.post('/gh_user', async (req, res, next) => {
+  if(!req.body.user_name.length){
+    req.session.gh_user_se = true, req.session.gh_user_em = C['err_mes']['user'][0];
+    return res.redirect('/');
+  }
 
-router.post('/', async (req, res, next) => {
+  req.session.ghuser_name = req.body.user_name;
+
+  return res.redirect('/chfile/repos');
+});
+
+router.post('/gh_url', async (req, res, next) => {
   let url = req.body.url;
-  if(url == "sample.cpp") url = "https://github.com/KoenHan/code_typing_app/blob/master/examples/sample.cpp";
-  else if(url == "sample.py") url = "https://github.com/KoenHan/code_typing_app/blob/feature/master/examples/sample.py";
+  if(url == "sample.cpp") url = C['sample_url']['cpp'];
+  else if(url == "sample.py") url = C['sample_url']['py'];
 
   const dot_pos = url.lastIndexOf('.');
   const slash_pos = url.lastIndexOf('/');
-  if(!url || dot_pos <= slash_pos || slash_pos == -1)
-    return redirect(res, req, err_message[0]);
+  if(!url.length || dot_pos <= slash_pos || slash_pos == -1){
+    req.session.gh_url_se = true, req.session.gh_url_em = C['err_mes']['url'][0];
+    return res.redirect('/');
+  }
 
-  const ext = url.slice(dot_pos);
-  if(ext.length == 1) return redirect(res, req, err_message[0]);
+  const ext = url.slice(dot_pos+1);
+  if(!ext.length) {
+    req.session.gh_url_se = true, req.session.gh_url_em = C['err_mes']['url'][0];
+    return res.redirect('/');
+  }
 
-  const select_path = {
-    'github' : '[id^=LC]'
-  };
-  const texts = await get_texts(url, select_path['github']);
-  if(!texts.length) return redirect(res, req, err_message[1]);
+  const texts = await get_texts(url, C['select_path']['github']);
+  if(!texts.length) {
+    req.session.gh_url_se = true, req.session.gh_url_em = C['err_mes']['url'][1];
+    return res.redirect('/');
+  }
+  req.session.texts = texts;
+  req.session.ext = ext;
+  return res.redirect('/');
+});
+
+router.post('/upload', multer({dest: 'tmp/'}).single('file'), (req, res, next) => {
+  if(req.file == undefined){
+    req.session.upload_se = true, req.session.upload_em = C['err_mes']['upload'][0];
+    return res.redirect('/');
+  }
+
+  const dot_pos = req.file.originalname.lastIndexOf('.');
+  if(dot_pos == -1 || dot_pos == req.file.originalname.length - 1){
+    req.session.upload_se = true, req.session.upload_em = C['err_mes']['upload'][1];
+    return res.redirect('/');
+  }
+  const ext = req.file.originalname.slice(dot_pos+1);
+  const content = fs.readFileSync(req.file.path, 'utf-8');
+  const texts = content.split('\n').map( row => {
+    if(row == '') row = '\n';
+    return row;
+  });
+
   req.session.texts = texts;
   req.session.ext = ext;
   return res.redirect('/');

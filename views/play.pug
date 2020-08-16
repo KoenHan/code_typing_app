@@ -6,14 +6,14 @@ block content
     .lm-out
       #limit_message.form-inline.lm-in
         |
-        label.my-1.mr-2.h6(for="selected_limit_time") 制限時間：
+        label.my-1.mr-2.h6(for="selected_limit_time") タイピング時間：
         |
         select#selected_limit_time.custom-select.my-1.mr-sm-2(name="limit_time")
+          option(value="0", selected="selected") なし
           option(value="10") 10秒
-          option(value="30", selected="selected") 30秒
+          option(value="30") 30秒
           option(value="60") 60秒
           option(value="90") 90秒
-          option(value="0") なし
     |
     h6#start_message.text-align.text-center.mb-5 spaceを押すとスタートします．
     |
@@ -38,3 +38,6 @@ block content
     id='main',
     data-texts=texts,
     data-ext=ext)
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js")
+  script.
+    hljs.initHighlightingOnLoad();

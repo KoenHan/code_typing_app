@@ -19,7 +19,7 @@ a {
 
 .code span
 {
-  display: block;
+  padding: 0px;
   white-space: pre-wrap;
   overflow: hidden;
 }
@@ -96,4 +96,61 @@ a {
   left: 50%;
   background-color: white;
   z-index: 1;
+}
+
+li a{
+  color: #000000;
+  text-decoration: none;
+}
+
+li a::hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+.ml-7{
+  margin-left: 80px;
+}
+
+.ml-10{
+  margin-left: 90px;
+}
+
+img, canvas {
+  height: 500px;
+  width: 800px;
+  border: solid 3px #ffa500;
+  border-radius: 10px;
+}
+
+.file {
+  height: 20px;
+  width: 15px;
+  border: none;
+  border-radius: 0px;
+}
+
+.dir {
+  height: 20px;
+  width: 25px;
+  border: none;
+  border-radius: 0px;
+}
+
+.chli {
+  display:inline-block;
+  padding: 0;
+}
+
+.cha {
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  height: 40px;
+  width: auto;
+}
+
+.chp {
+  padding-top: 10px;
 }
