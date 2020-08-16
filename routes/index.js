@@ -81,7 +81,7 @@ router.post('/upload', multer({dest: 'tmp/'}).single('file'), (req, res, next) =
     req.session.upload_se = true, req.session.upload_em = C['err_mes']['upload'][1];
     return res.redirect('/');
   }
-  const ext = req.file.originalname.slice(dot_pos);
+  const ext = req.file.originalname.slice(dot_pos+1);
   const content = fs.readFileSync(req.file.path, 'utf-8');
   const texts = content.split('\n').map( row => {
     if(row == '') row = '\n';
