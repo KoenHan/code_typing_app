@@ -1,11 +1,8 @@
 extends layout
 
 block content
-  h5.mb-2.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
-  //- p.mb-0.ml-4 コードのURLを入れてください．
-  //- p.mb-0.ml-4 GitHubに対応しています．
-  //- p.mb-0.ml-4 例) https://github.com/.../file
-  //- p.mb-4.ml-4 試し打ち用にsample.cppとsample.pyがあります．
+  h5.mb-0.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
+  p.mb-2.ml-5 （GitHubのみ対応しています．）
   form(action="/gh_user" method="POST")
     .input-group.w-75
       |
@@ -19,9 +16,9 @@ block content
     |
     if gh_user_se
       .text-danger.ml-4 #{gh_user_em}
-  details.ml-10.w-50
-    summary githubユーザー名を用いた使い方
-    p testtest
+  details.ml-10.mt-2.w-50
+    summary.mb-1 githubユーザー名を用いた使い方
+    img(data-gifffer="/images/explain/ghuser.gif", alt="githubユーザー名を用いた使い方.gif", height=500, width=800)
   br
   form(action="/gh_url" method="POST")
     .input-group.w-75
@@ -40,9 +37,11 @@ block content
     |
     if gh_url_se
       .text-danger.ml-4 #{gh_url_em}
-  details.ml-10.w-50
-    summary githubのURLを用いた使い方
-    p testtest
+  details.ml-10.mt-2.w-50
+    summary.mb-1 githubのURLを用いた使い方
+    img(data-gifffer="/images/explain/url.gif", alt="githubのURLを用いた使い方.gif", height=500, width=800)
+    p.mb-0 ※ファイルパスは https://github.com/.../file.extension のようにしてください．
+    p.mb-0 ※試し打ち用に sample.cpp と sample.py があります．
   br
   form(action="/upload", method="POST", enctype="multipart/form-data")
     .input-group.w-75
@@ -57,7 +56,11 @@ block content
     |
     if upload_se
       .text-danger.ml-4 #{upload_em}
-  details.ml-10.w-50
-    summary ファイルアップロードを用いた使い方
-    p
-      img(src="/explain/upload.gif", alt="ファイルアップロードを用いた使い方.gif")
+  details.ml-10.mt-2.w-50
+    summary.mb-1 ファイルアップロードを用いた使い方
+    img(data-gifffer="/images/explain/upload.gif", alt="ファイルアップロードを用いた使い方.gif", height=500, width=800)
+  script(type="text/javascript", src="/javascripts/build/gifffer.min.js")
+  script.
+    window.onload = function() {
+      Gifffer();
+    }

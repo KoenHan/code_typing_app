@@ -113,5 +113,26 @@ li a::hover {
 }
 
 .ml-10{
-  margin-left: 86px;
+  margin-left: 90px;
+}
+
+img, canvas {
+  height: 500px;
+  width: 800px;
+  border: solid 3px #ffa500;
+  border-radius: 10px;
+}
+
+.file {
+  height: 20px;
+  width: 15px;
+  border: none;
+  border-radius: 0px;
+}
+
+.dir {
+  height: 20px;
+  width: 25px;
+  border: none;
+  border-radius: 0px;
 }
