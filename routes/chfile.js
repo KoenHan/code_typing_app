@@ -17,7 +17,7 @@ const get_rate_limits = async () => {
 
 router.get('/repos', async (req, res, next) => {
   const rate_limits = await get_rate_limits();
-  console.log(rate_limits);
+  // console.log(rate_limits);
   if(!rate_limits) {
     req.session.gh_user_se = true, req.session.gh_user_em = C['err_mes']['api'];
     return res.redirect('/');
@@ -49,7 +49,7 @@ router.get('/repos', async (req, res, next) => {
 
 router.get('/repos/branches', async (req, res, next) => {
   const rate_limits = await get_rate_limits();
-  console.log(rate_limits);
+  // console.log(rate_limits);
   if(!rate_limits) {
     req.session.gh_user_se = true, req.session.gh_user_em = C['err_mes']['api'];
     return res.redirect('/');
@@ -60,7 +60,7 @@ router.get('/repos/branches', async (req, res, next) => {
       resolve(body);
     });
   });
-  console.log(branches);
+  // console.log(branches);
 
   //リポジトリが見つからない場合のバリデーション（ブランチがない＝リポジトリが間違ってる）
   if( branches == undefined || !branches.length){
@@ -85,7 +85,7 @@ router.get('/repos/branches', async (req, res, next) => {
 
 router.get('/repos/branches/contents', async (req, res, next) => {
   const rate_limits = await get_rate_limits();
-  console.log(rate_limits);
+  // console.log(rate_limits);
   if(!rate_limits) {
     req.session.gh_user_se = true, req.session.gh_user_em = C['err_mes']['api'];
     return res.redirect('/');

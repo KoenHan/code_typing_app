@@ -6,5 +6,6 @@ block content
     .text-danger.ml-5 #{content_em}
   ul.list-group.ml-5.w-50
     each item in items
-      li.list-group-item.list-group-item-action
-        a(href=uri+"?value="+item) #{item}
+      li.list-group-item.list-group-item-action.chli
+          a.cha(href=uri+"?value="+item)
+            p.ml-3.chp #{item}

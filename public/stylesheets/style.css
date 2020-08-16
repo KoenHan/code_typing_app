@@ -136,3 +136,21 @@ img, canvas {
   border: none;
   border-radius: 0px;
 }
+
+.chli {
+  display:inline-block;
+  padding: 0;
+}
+
+.cha {
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  height: 40px;
+  width: auto;
+}
+
+.chp {
+  padding-top: 10px;
+}
