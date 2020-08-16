@@ -2,6 +2,7 @@ const download_texts = $("#main").data("texts");
 const ext = $("#main").data("ext");
 
 const RED = "#FF82B2";
+const WHITE = "#FFFFFF";
 const GREEN = "#99FF99";
 const GRAY = "#808080";
 const RETURN = "\u23CE";
@@ -16,6 +17,7 @@ const target_line = document.getElementById("target_line");
 const untyped_lines = document.getElementById("untyped_lines");
 const displayed_score = document.getElementById("displayed_score");
 const code = document.getElementById("code");
+const comment_ele = document.createElement("span");
 
 let mistype = 0;
 let correct = 0;
@@ -119,6 +121,7 @@ function init_display_code()
         untyped_lines.appendChild(line);
     }
     update("enter");
+    while(target_words =="" && comment_ele.textContent != "") while(update("enter"));
 }
 
 function clear_code()
@@ -191,6 +194,7 @@ function listening_type(keypress_event)
     if(keypress_event.keyCode == 13) key_str = "enter"
     else key_str = String.fromCharCode(keypress_event.keyCode);
     update(key_str);
+    while(target_words =="" && comment_ele.textContent != "") while(update("enter"));
     keypress_event.preventDefault();
 }
 
@@ -208,7 +212,7 @@ function update(key_str)
         correct++;
         target_char_idx = 0;
         const line = document.createElement("span");
-        if(target_words != "") line.textContent = target_words;
+        if(target_words != "" || comment_ele.textContent != "") line.textContent = target_words + comment_ele.textContent;
         else
         {
             line.textContent = "koren";
@@ -216,9 +220,28 @@ function update(key_str)
         }
         line.classList.add(ext);
         hljs.highlightBlock(line);
+        line.style.backgroundColor = WHITE;
         typed_lines.appendChild(line);
-        if(untyped_lines.firstChild.style.visibility != "hidden") target_words = untyped_lines.firstChild.textContent;
-        else target_words = "";
+        target_words = "";
+        comment_ele.textContent = "";
+        if(untyped_lines.firstChild.style.visibility != "hidden")
+        {
+            const ele = untyped_lines.firstChild;
+            ele.classList.add(ext);
+            hljs.highlightBlock(ele);
+            while(ele.firstChild)
+            {
+                if(ele.firstChild.classList.contains("hljs-comment"))
+                {
+                    comment_ele.textContent = ele.firstChild.textContent;
+                }
+                else
+                {
+                    target_words += ele.firstChild.textContent;
+                }
+                ele.removeChild(ele.firstChild);
+            }
+        }
         remove_last_whitespace();
         target_char_idx = skip_first_whitespace(target_words);
         untyped_lines.removeChild(untyped_lines.firstChild);
@@ -244,10 +267,15 @@ function update(key_str)
     before.textContent = target_words.substring(0, target_char_idx);
     before.classList.add(ext);
     hljs.highlightBlock(before);
+    before.style.backgroundColor = WHITE;
     before.style.display = "inline";
     target_line.appendChild(before);
     const target = document.createElement("span");
-    if(target_words.length == target_char_idx) target.textContent = RETURN;
+    if(target_words.length == target_char_idx)
+    {
+        target_line.appendChild(comment_ele);
+        target.textContent = RETURN;
+    }
     else target.textContent = target_words[target_char_idx];
     target.style.backgroundColor = back_color;
     target_line.appendChild(target);
@@ -255,6 +283,7 @@ function update(key_str)
     after.textContent = target_words.substring(target_char_idx+1, target_words.length);
     after.style.color = GRAY;
     target_line.appendChild(after);
+    if(target_words.length != target_char_idx) target_line.appendChild(comment_ele);
     target_line.scrollIntoView({
         behavior: "smooth",
         block: "center"
