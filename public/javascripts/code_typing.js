@@ -24,9 +24,13 @@ let target_words = "";
 let target_char_idx = 0;
 let start_time;
 let end_time;
+let reserved_words = {};
 
 window.onload = () => {
     document.addEventListener("keypress", waiting_space, false);
+    $.getJSON("./config/" + ext + ".json", (data) => {
+        reserved_words = data;
+    });
 }
 
 function waiting_space(keypress_event)
@@ -95,6 +99,11 @@ function start_game()
     }
 }
 
+function split_word(str)
+{
+    str = download_texts[0];
+}
+
 function init_display_code()
 {
     clear_code();
@@ -102,6 +111,7 @@ function init_display_code()
     for(let i=0; i<download_texts.length; i++)
     {
         const line = document.createElement("span");
+        line.style.display = "block";
         line.textContent = download_texts[i];
         line.style.color = GRAY;
         if(download_texts[i] == "\n")
@@ -207,6 +217,7 @@ function update(key_str)
             line.textContent = "koren";
             line.style.visibility = "hidden";
         }
+        hljs.highlightBlock(line);
         typed_lines.appendChild(line);
         if(untyped_lines.firstChild.style.visibility != "hidden") target_words = untyped_lines.firstChild.textContent;
         else target_words = "";
@@ -233,18 +244,17 @@ function update(key_str)
     }
     const before = document.createElement("span");
     before.textContent = target_words.substring(0, target_char_idx);
+    hljs.highlightBlock(before);
     before.style.display = "inline";
     target_line.appendChild(before);
     const target = document.createElement("span");
     if(target_words.length == target_char_idx) target.textContent = RETURN;
     else target.textContent = target_words[target_char_idx];
     target.style.backgroundColor = back_color;
-    target.style.display = "inline";
     target_line.appendChild(target);
     const after = document.createElement("span");
     after.textContent = target_words.substring(target_char_idx+1, target_words.length);
     after.style.color = GRAY;
-    after.style.display = "inline";
     target_line.appendChild(after);
     target_line.scrollIntoView({
         behavior: "smooth",
