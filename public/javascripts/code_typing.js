@@ -217,6 +217,7 @@ function update(key_str)
             line.textContent = "koren";
             line.style.visibility = "hidden";
         }
+        line.classList.add(ext);
         hljs.highlightBlock(line);
         typed_lines.appendChild(line);
         if(untyped_lines.firstChild.style.visibility != "hidden") target_words = untyped_lines.firstChild.textContent;
@@ -244,6 +245,7 @@ function update(key_str)
     }
     const before = document.createElement("span");
     before.textContent = target_words.substring(0, target_char_idx);
+    before.classList.add(ext);
     hljs.highlightBlock(before);
     before.style.display = "inline";
     target_line.appendChild(before);
