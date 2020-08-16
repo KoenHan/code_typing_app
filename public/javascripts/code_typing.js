@@ -99,6 +99,20 @@ function start_game()
     }
 }
 
+function remove_CR(str)
+{
+    let res = "";
+    for(let i=0; i<str.length; i++)
+    {
+        let c = escape(str.substring(i, i+1));
+        if(c != "%0D" && c != "%0A")
+        {
+            res += str.substring(i, i+1);
+        }
+    }
+    return res;
+}
+
 function init_display_code()
 {
     clear_code();
@@ -107,9 +121,10 @@ function init_display_code()
     {
         const line = document.createElement("span");
         line.style.display = "block";
-        line.textContent = download_texts[i];
+        let text = remove_CR(download_texts[i]);
+        line.textContent = text;
         line.style.color = GRAY;
-        if(download_texts[i] == "\n")
+        if(text == "")
         {
             line.style.visibility = "hidden";
             line.textContent = "koren";
