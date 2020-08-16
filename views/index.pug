@@ -1,15 +1,29 @@
 extends layout
 
 block content
-  h5.mb-2.ml-4 URL先のコードを使ってタイピング練習ができるサイトです．
-  p.mb-0.ml-5 コードのURLを入れてください．
-  p.mb-0.ml-5 GitHubに対応しています．
-  p.mb-0.ml-5 例) https://github.com/.../file
-  p.mb-4.ml-5 試し打ち用にsample.cppとsample.pyがあります．
-  form(action="/" method="POST")
+  h5.mb-0.ml-5 URL先のコードを使ってタイピング練習ができるサイトです．
+  p.mb-2.ml-5 （GitHubのみ対応しています．）
+  form(action="/gh_user" method="POST")
     .input-group.w-75
       |
-      input.form-control.ml-5(
+      input.form-control.ml-7(
+        type="search",
+        name="user_name",
+        placeholder="GitHubのユーザー名を入力してください．")
+      |
+      .input-group-append
+        input.btn.btn-color(type="submit", value="検索")
+    |
+    if gh_user_se
+      .text-danger.ml-7 #{gh_user_em}
+  details.ml-10.mt-2.w-50
+    summary.mb-1 githubユーザー名を用いた使い方
+    img(data-gifffer="/images/explain/ghuser.gif", alt="githubユーザー名を用いた使い方.gif", height=500, width=800)
+  br
+  form(action="/gh_url" method="POST")
+    .input-group.w-75
+      |
+      input.form-control.ml-7(
         type="search",
         name="url",
         list="samples",
@@ -21,5 +35,32 @@ block content
       .input-group-append
         input.btn.btn-color(type="submit", value="練習する")
     |
-    if show_err
-      .text-danger.ml-5 #{err_mes}
+    if gh_url_se
+      .text-danger.ml-7 #{gh_url_em}
+  details.ml-10.mt-2.w-50
+    summary.mb-1 githubのURLを用いた使い方
+    img(data-gifffer="/images/explain/url.gif", alt="githubのURLを用いた使い方.gif", height=500, width=800)
+    p.mb-0 ※ファイルパスは https://github.com/.../file.extension のようにしてください．
+    p.mb-0 ※試し打ち用に sample.cpp と sample.py があります．
+  br
+  form(action="/upload", method="POST", enctype="multipart/form-data")
+    .input-group.w-75
+      |
+      input.form-control.ml-7(
+        type="file",
+        name="file",
+        placeholder="ファイルをアップロードをしてください．")
+      |
+      .input-group-append
+        input.btn.btn-color(type="submit", value="アップロード")
+    |
+    if upload_se
+      .text-danger.ml-7 #{upload_em}
+  details.ml-10.mt-2.w-50
+    summary.mb-1 ファイルアップロードを用いた使い方
+    img(data-gifffer="/images/explain/upload.gif", alt="ファイルアップロードを用いた使い方.gif", height=500, width=800)
+  script(type="text/javascript", src="/javascripts/build/gifffer.min.js")
+  script.
+    window.onload = function() {
+      Gifffer();
+    }

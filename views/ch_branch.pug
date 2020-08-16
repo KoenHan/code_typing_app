@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  p.mb-3.ml-4 #{explain}
+  if content_se
+    .text-danger.ml-5 #{content_em}
+  ul.list-group.ml-5.w-50
+    each item in items
+      li.list-group-item.list-group-item-action.chli
+          a.cha(href=uri+"?value="+item)
+            p.ml-3.chp #{item}

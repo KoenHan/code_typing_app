@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  p.mb-3.ml-4 #{explain}
+  if content_se
+    .text-danger.ml-5 #{content_em}
+  ul.list-group.ml-5.w-50
+    each item in items
+      li.list-group-item.list-group-item-action.chli
+        a.cha(href=uri+"?name="+item.name+"&type="+item.type)
+          p.ml-3.chp
+            |
+            if item.type == "file"
+              img.file.mr-1(src="/images/icon/file2.png")
+            else
+              img.dir.mr-1(src="/images/icon/folder2.png")
+            | #{item.name}
