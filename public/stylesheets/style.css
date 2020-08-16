@@ -19,7 +19,7 @@ a {
 
 .code span
 {
-  display: block;
+  padding: 0px;
   white-space: pre-wrap;
   overflow: hidden;
 }
