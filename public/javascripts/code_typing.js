@@ -18,6 +18,7 @@ const untyped_lines = document.getElementById("untyped_lines");
 const displayed_score = document.getElementById("displayed_score");
 const code = document.getElementById("code");
 const comment_ele = document.createElement("span");
+comment_ele.textContent = "";
 
 let mistype = 0;
 let correct = 0;
@@ -98,11 +99,6 @@ function start_game()
     }
 }
 
-function split_word(str)
-{
-    str = download_texts[0];
-}
-
 function init_display_code()
 {
     clear_code();
@@ -121,7 +117,7 @@ function init_display_code()
         untyped_lines.appendChild(line);
     }
     update("enter");
-    while(target_words =="" && comment_ele.textContent != "") while(update("enter"));
+    while(is_whitespace_only(target_words) && comment_ele.textContent != "") update("enter");
 }
 
 function clear_code()
@@ -194,8 +190,18 @@ function listening_type(keypress_event)
     if(keypress_event.keyCode == 13) key_str = "enter"
     else key_str = String.fromCharCode(keypress_event.keyCode);
     update(key_str);
-    while(target_words =="" && comment_ele.textContent != "") while(update("enter"));
+    while(is_whitespace_only(target_words) && comment_ele.textContent != "") update("enter");
     keypress_event.preventDefault();
+}
+
+function is_whitespace_only(str)
+{
+    let count = 0;
+    for(let i=0; i<str.length; i++)
+    {
+        if(str[i] == " ") count++;
+    }
+    return (str.length == count);
 }
 
 function update(key_str)
@@ -226,12 +232,13 @@ function update(key_str)
         comment_ele.textContent = "";
         if(untyped_lines.firstChild.style.visibility != "hidden")
         {
-            const ele = untyped_lines.firstChild;
+            const ele = document.createElement("span");
+            ele.textContent = untyped_lines.firstChild.textContent;
             ele.classList.add(ext);
             hljs.highlightBlock(ele);
             while(ele.firstChild)
             {
-                if(ele.firstChild.classList.contains("hljs-comment"))
+                if($(ele.firstChild).hasClass("hljs-comment"))
                 {
                     comment_ele.textContent = ele.firstChild.textContent;
                 }
@@ -242,8 +249,10 @@ function update(key_str)
                 ele.removeChild(ele.firstChild);
             }
         }
-        remove_last_whitespace();
+        if(!is_whitespace_only(target_words)) remove_last_whitespace();
         target_char_idx = skip_first_whitespace(target_words);
+        console.log(target_words);
+        console.log(comment_ele.textContent);
         untyped_lines.removeChild(untyped_lines.firstChild);
         back_color = GREEN;
     }
