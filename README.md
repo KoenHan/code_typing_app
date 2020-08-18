@@ -8,6 +8,7 @@
 
 ```
 $ git clone https://github.com/KoenHan/code_typing_app.git
+$ cd /path/to/code_typing_app
 $ npm install
 ```
 
@@ -20,4 +21,4 @@ $ npm install
 $ cd /path/to/code_typing_app
 $ DEBUG=first-app:* npm start
 ```
-2. Then connect to `localhost:3000` in your web.
+2. Then connect to `localhost:3000` in your web browser.
